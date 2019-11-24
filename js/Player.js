@@ -34,7 +34,7 @@ class Player {
     })
   }
 
-  static getCarsAtEnd() {
+  getCarsAtEnd() {
     database.ref('CarsAtEnd').on("value",(data)=>{
       this.rank = data.val();
     })

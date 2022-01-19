@@ -43,8 +43,8 @@ class Game {
   play(){
     form.hide();
     
-    Player.getPlayerInfo();
-    player.getCarsAtEnd();
+    Player.getPlayerInfo(); //CLASE JUGADOR TOMA TODA LA INFO DE TODOS
+    player.getCarsAtEnd(); // EL JUGADOR SOLITO DE ESA SESION SABER QUE RANKING
     
     if(allPlayers !== undefined){
       background(rgb(198,135,103));
@@ -94,8 +94,8 @@ class Game {
 
     if(player.distance > 3860){
       gameState = 2;
-      player.rank +=1
-      Player.updateCarsAtEnd(player.rank)
+      player.rank +=1;
+      Player.updateCarsAtEnd(player.rank);
     }
    
     drawSprites();
@@ -104,5 +104,21 @@ class Game {
   end(){
     console.log("Game Ended");
     console.log(player.rank);
+    swal(
+      {
+        title: "¡FIN DEL JUEGO!",
+        text: `Tu ranking es: ${player.rank}`,
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/536/536056.png",
+        imageSize: "150x150",
+        confirmButtonText: "REINICIAR"
+      },
+      function(isConfirm) {
+        if(isConfirm){
+          player.updateCount(0);
+          game.update(0);
+          Player.updateCarsAtEnd(0);
+        }
+      }
+    );
   }
 }
